@@ -1,0 +1,20 @@
+﻿
+@{
+	ViewBag.Title = "Page1";
+}
+
+
+<div style="width: auto; background-color: aqua">
+	<h2>Hi <b>@Context.User.Identity.Name</b>! Welcome to my first MVC 5 Web App!</h2>
+
+	@if (Request.IsAuthenticated)
+	{
+		<strong>@Html.Encode(User.Identity.Name)</strong>
+		@Html.ActionLink("Log Out", "Logout", "Home")
+	}
+	else
+	{
+		<span> | </span>
+		@Html.ActionLink("Log In", "Login", "Home")
+	}
+</div>
