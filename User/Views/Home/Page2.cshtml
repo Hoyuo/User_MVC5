@@ -4,3 +4,33 @@
 }
 
 <h2>title</h2>
+
+<div id="posts-wrapper">
+	@{ Html.RenderAction("MorePosts", new {count = 20});}
+</div>
+
+@section scripts{
+	<script type="text/javascript">
+		var start = 15;
+		var url = '@Url.Action("MorePosts")';
+		var tbody = $('#posts-wrapper');
+		$(window).scroll(function () {
+			if ($(window).scrollTop() == $(document).height() - $(window).height()) {
+				
+				$.get(url, { startIndex: start }, function(response) {
+					tbody.append(response);
+					start += 15; // increment for next call
+				});
+			}
+		});
+	</script>
+}
+
+@*
+	public ActionResult Fetch(int startIndex)
+	{
+		query = db.MyEmployee.OrderBy(x => x.ID).Skip(startIndex).Take(15);
+		return PartialView(query);
+	}
+	
+*@

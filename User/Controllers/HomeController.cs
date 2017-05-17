@@ -47,5 +47,11 @@ namespace User.Controllers
 			FormsAuthentication.SignOut();
 			return RedirectToAction("Index", "Home");
 		}
+
+		public ActionResult MorePosts(int? count)
+		{
+			count = count ?? 3;
+			return PartialView(count);
+		}
 	}
 }
